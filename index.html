@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>財神降臨 · Cai Shen's Fortune</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCREEN 1: Entry                        -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="small-screen-msg">view on larger screens pls</div>
+
+    <div class="screen active" id="screen-entry">
+      <div class="entry-layout">
+
+        <div class="entry-image-col">
+          <img
+            src="/assets/zodiac-god.png"
+            alt="Cai Shen, God of Wealth"
+            class="caishen-img"
+            id="caishen-img"
+            onerror="this.style.display='none'"
+          />
+        </div>
+
+        <div class="entry-content-col">
+          <h1 class="title-main">Your fortune<br>awaits</h1>
+
+          <div class="form-card">
+            <div class="form-group">
+              <label for="dob">Date of birth</label>
+              <input type="date" id="dob" name="dob" required />
+            </div>
+            <div class="form-group">
+              <label for="tob-hour">Time of birth <span class="optional">(optional)</span></label>
+              <div class="time-picker" id="tob-picker">
+                <input
+                  type="number"
+                  id="tob-hour"
+                  class="time-part"
+                  min="1"
+                  max="12"
+                  placeholder="12"
+                  autocomplete="off"
+                />
+                <span class="time-sep">:</span>
+                <input
+                  type="number"
+                  id="tob-minute"
+                  class="time-part"
+                  min="0"
+                  max="59"
+                  placeholder="00"
+                  autocomplete="off"
+                />
+                <div class="ampm-seg" id="tob-ampm">
+                  <button type="button" class="ampm-opt active" data-val="AM">AM</button>
+                  <button type="button" class="ampm-opt" data-val="PM">PM</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="cta-btn" id="btn-approach">
+              Approach the God of Wealth <i data-lucide="arrow-right"></i>
+            </button>
+            <p class="form-error" id="form-error"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCREEN 2: Bow Detection                -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="screen" id="screen-bow">
+      <video id="webcam" autoplay playsinline muted></video>
+      <div class="bow-overlay">
+        <h2 class="bow-title">Bow three times to receive your fortune</h2>
+
+        <div class="bow-indicators" id="bow-indicators">
+          <div class="bow-dot" id="bow-dot-0"></div>
+          <div class="bow-dot" id="bow-dot-1"></div>
+          <div class="bow-dot" id="bow-dot-2"></div>
+        </div>
+
+        <div class="bow-figure" id="bow-figure"></div>
+
+        <button class="manual-btn" id="btn-manual-bow"></button>
+        <p class="manual-hint" id="manual-hint"></p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCREEN 3: Oracle Consultation          -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="screen" id="screen-oracle">
+      <div class="oracle-content">
+        <div class="coins-animation">
+          <svg viewBox="0 0 120 120" class="coin-svg" id="coin-svg">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#D4A017" stroke-width="3" />
+            <circle cx="60" cy="60" r="40" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.6"/>
+            <rect x="50" y="50" width="20" height="20" fill="none" stroke="#D4A017" stroke-width="2" />
+            <text x="60" y="65" text-anchor="middle" fill="#FFD700" font-size="16" font-family="Noto Serif SC">財</text>
+          </svg>
+        </div>
+        <p class="oracle-phrase" id="oracle-phrase" style="display:none"></p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCREEN 4: Fortune Slides               -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="screen" id="screen-fortune">
+      <nav class="slide-nav" id="slide-nav"></nav>
+      <button class="slide-down-btn" id="slide-down-btn" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <div class="slides-container" id="slides-container">
+
+        <!-- Slide 0: Hero — animal title + zodiac statue + Ba Zi chart -->
+        <div class="slide slide-hero" id="slide-0">
+          <h2 class="slide-hero-title" id="text-animal-title"></h2>
+          <img class="slide-zodiac-img" id="zodiac-img" src="" alt="" />
+          <div class="bazi-chart" id="bazi-chart">
+            <div class="bazi-pillar" id="pillar-year">
+              <div class="pillar-label">Year</div>
+              <div class="pillar-stem" id="stem-year"></div>
+              <div class="pillar-branch" id="branch-year"></div>
+              <div class="pillar-element" id="element-year"></div>
+            </div>
+            <div class="bazi-pillar" id="pillar-month">
+              <div class="pillar-label">Month</div>
+              <div class="pillar-stem" id="stem-month"></div>
+              <div class="pillar-branch" id="branch-month"></div>
+              <div class="pillar-element" id="element-month"></div>
+            </div>
+            <div class="bazi-pillar" id="pillar-day">
+              <div class="pillar-label">Day</div>
+              <div class="pillar-stem" id="stem-day"></div>
+              <div class="pillar-branch" id="branch-day"></div>
+              <div class="pillar-element" id="element-day"></div>
+            </div>
+            <div class="bazi-pillar" id="pillar-hour">
+              <div class="pillar-label">Hour</div>
+              <div class="pillar-stem" id="stem-hour"></div>
+              <div class="pillar-branch" id="branch-hour"></div>
+              <div class="pillar-element" id="element-hour"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 1: 2026 fortune — lantern + overall text -->
+        <div class="slide slide-centered" id="slide-1">
+          <h3 class="slide-title">2026 fortune</h3>
+          <div class="slide-centered-body">
+            <img class="slide-object" src="/assets/object-lantern.png" alt="" />
+            <p class="slide-body" id="text-overall"></p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Lucky numbers + Lucky colors -->
+        <div class="slide slide-lucky" id="slide-2">
+          <div class="lucky-block">
+            <h3 class="slide-title">Lucky numbers</h3>
+            <div class="lucky-tags" id="lucky-numbers"></div>
+          </div>
+          <div class="lucky-block">
+            <h3 class="slide-title">Lucky colors</h3>
+            <div class="lucky-tags lucky-tags--wide" id="lucky-colors"></div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Your zodiac — fu + personality -->
+        <div class="slide slide-centered" id="slide-3">
+          <h3 class="slide-title">Your zodiac</h3>
+          <div class="slide-centered-body">
+            <img class="slide-object" src="/assets/object-fu.png" alt="" />
+            <p class="slide-body" id="text-zodiac"></p>
+          </div>
+        </div>
+
+        <!-- Slide 4: Five elements — text left, fish right -->
+        <div class="slide slide-two-col" id="slide-4">
+          <h3 class="slide-title-top">Five elements</h3>
+          <div class="slide-two-col-row">
+            <p class="slide-body slide-body--left" id="text-elements"></p>
+            <img class="slide-col-img slide-col-img--lg" src="/assets/object-fish.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Slide 5: Wealth — money left, text right -->
+        <div class="slide slide-two-col" id="slide-5">
+          <h3 class="slide-title-top">Wealth</h3>
+          <div class="slide-two-col-row">
+            <img class="slide-col-img" src="/assets/object-money.png" alt="" />
+            <p class="slide-body slide-body--left" id="text-wealth"></p>
+          </div>
+        </div>
+
+        <!-- Slide 6: Relationships — text left, firecracker right -->
+        <div class="slide slide-two-col" id="slide-6">
+          <h3 class="slide-title-top">Relationships</h3>
+          <div class="slide-two-col-row">
+            <p class="slide-body slide-body--left" id="text-relationships"></p>
+            <img class="slide-col-img" src="/assets/object-firecracker.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Slide 7: Compatibility — lions + centered text + stacked pill groups -->
+        <div class="slide slide-compat" id="slide-7">
+          <h3 class="slide-title-top">Compatibility</h3>
+          <img class="slide-compat-img" src="/assets/object-lions.png" alt="" />
+          <p class="slide-body" id="text-compatibility"></p>
+          <div class="compat-group">
+            <span class="compat-label">Compatible</span>
+            <div class="lucky-tags" id="compat-harmonious"></div>
+          </div>
+          <div class="compat-group">
+            <span class="compat-label compat-label--friction">Challenging</span>
+            <div class="lucky-tags compat-challenging" id="compat-challenging"></div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Closing -->
+        <div class="slide slide-closing" id="slide-8">
+          <p class="slide-closing-line">Thanks for joining us today!</p>
+          <p class="slide-closing-line">Have an auspicious 2026</p>
+          <button class="play-again-btn" id="btn-restart">Play again</button>
+        </div>
+
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
