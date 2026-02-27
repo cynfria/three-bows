@@ -893,6 +893,22 @@ input[type="date"].empty {
   height: calc(100vh - 64px);
   pointer-events: none;
   z-index: 9999;
+  background:
+    radial-gradient(circle at var(--mx, -50%) var(--my, 50%),
+      rgba(255,252,232,0.92) 0%,
+      rgba(255,228,110,0.52) 18%,
+      transparent 42%
+    ),
+    linear-gradient(135deg,
+      #4A2D00 0%,  #8B5A0A 14%, #C8920F 27%, #FFD060 40%,
+      #FFDA6C 50%, #C8920F 60%, #FFE47A 73%, #8B5A0A 86%, #4A2D00 100%
+    );
+  /* 9-slice mask: corners stay fixed-size, lines stretch — same slice values as original border-image */
+  -webkit-mask-box-image: url('/assets/knot-border.svg') 40 / 46px 44px / 0 stretch;
+  mask-border-source: url('/assets/knot-border.svg');
+  mask-border-slice: 40;
+  mask-border-width: 46px 44px;
+  mask-border-repeat: stretch;
 }
 
 @media (max-width: 768px) {

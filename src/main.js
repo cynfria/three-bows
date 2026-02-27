@@ -373,17 +373,17 @@ els.btnRestart.addEventListener('click', () => {
   }, 650);
 });
 
-// ─── Metallic Shader: border + CTA button ─────────────────────────────────────
-// Border: move specular highlight in SVG coordinate space (viewBox 0 0 1227 739,
-//         rendered inset 32px on each side).
-const cursorLight = document.getElementById('cursorLight');
+// ─── Metallic Shader: border ──────────────────────────────────────────────────
+// Move the specular radial-gradient highlight with the cursor.
+// Expressed as % of the div's dimensions so it works at any viewport size.
+const borderFrame = document.getElementById('border-frame');
 
 document.addEventListener('mousemove', (e) => {
-  if (!cursorLight) return;
-  const svgX = (e.clientX - 32) / (window.innerWidth  - 64) * 1227;
-  const svgY = (e.clientY - 32) / (window.innerHeight - 64) * 739;
-  cursorLight.setAttribute('cx', svgX.toFixed(1));
-  cursorLight.setAttribute('cy', svgY.toFixed(1));
+  if (!borderFrame) return;
+  const mx = ((e.clientX - 32) / (window.innerWidth  - 64) * 100).toFixed(1) + '%';
+  const my = ((e.clientY - 32) / (window.innerHeight - 64) * 100).toFixed(1) + '%';
+  borderFrame.style.setProperty('--mx', mx);
+  borderFrame.style.setProperty('--my', my);
 });
 
 // Button: move radial gradient highlight to cursor position within the element.
