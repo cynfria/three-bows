@@ -373,28 +373,16 @@ els.btnRestart.addEventListener('click', () => {
   }, 650);
 });
 
-// ─── Metallic Shader: border + CTA button ─────────────────────────────────────
-// Shift the gradient angle with the cursor — simulates tilting a metal surface.
-// Border: full-viewport cursor mapped to ±18deg shift around 135deg base.
-// Button: cursor X within the button mapped to ±20deg shift.
-const borderFrame = document.getElementById('border-frame');
-
-document.addEventListener('mousemove', (e) => {
-  if (!borderFrame) return;
-  const nx = e.clientX / window.innerWidth  - 0.5; // -0.5 → +0.5
-  const ny = e.clientY / window.innerHeight - 0.5;
-  const angle = 135 + nx * 36 + ny * 12; // subtle diagonal shift
-  borderFrame.style.setProperty('--grad-angle', angle.toFixed(1) + 'deg');
-});
-
+// ─── Metallic Shader: CTA button ──────────────────────────────────────────────
+// Shift the gradient angle with cursor X within the button.
 const ctaBtn = document.getElementById('btn-approach');
 ctaBtn?.addEventListener('mousemove', (e) => {
   const r = ctaBtn.getBoundingClientRect();
-  const nx = (e.clientX - r.left) / r.width - 0.5;
-  ctaBtn.style.setProperty('--btn-angle', (135 + nx * 40).toFixed(1) + 'deg');
+  const nx = (e.clientX - r.left) / r.width - 0.5; // -0.5 → +0.5
+  ctaBtn.style.setProperty('--btn-angle', (125 + nx * 70).toFixed(1) + 'deg');
 });
 ctaBtn?.addEventListener('mouseleave', () => {
-  ctaBtn.style.setProperty('--btn-angle', '135deg');
+  ctaBtn.style.setProperty('--btn-angle', '125deg');
 });
 
 // ─── Init ─────────────────────────────────────────────────────────────────────

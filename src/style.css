@@ -301,10 +301,12 @@ input[type="date"].empty {
   margin-top: 0.75rem;
   padding: 0.9rem 1.5rem;
   background: linear-gradient(
-    var(--btn-angle, 135deg),
-    #7A5500 0%, #B8820E 20%, #D4A420 38%,
-    #FFDA6C 50%,
-    #D4A420 62%, #B8820E 80%, #7A5500 100%
+    var(--btn-angle, 125deg),
+    #B08010 0%,
+    #C8920F 18%, #D4A820 30%,
+    #F0CC60 42%, #FFE488 50%, #F0CC60 58%,
+    #D4A820 70%, #C8920F 82%,
+    #B08010 100%
   );
   border: none;
   border-radius: 12px;
