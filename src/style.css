@@ -876,23 +876,6 @@ input[type="date"].empty {
   inset: 32px;
   pointer-events: none;
   z-index: 9999;
-  filter: drop-shadow(0 0 4px rgba(255, 210, 40, 0.35));
-  transition: filter 0.5s ease;
-  animation: borderShimmer 6s ease-in-out infinite;
-}
-
-#border-frame.border-hover {
-  animation: none;
-  filter:
-    drop-shadow(0 0 14px rgba(255, 215, 0, 0.95))
-    drop-shadow(0 0 5px rgba(255, 250, 180, 0.7))
-    brightness(1.3);
-}
-
-@keyframes borderShimmer {
-  0%,  100% { filter: drop-shadow(0 0 4px rgba(255, 210, 40, 0.30)) brightness(1.00); }
-  33%        { filter: drop-shadow(0 0 8px rgba(255, 220, 60, 0.55)) brightness(1.12) saturate(1.15); }
-  66%        { filter: drop-shadow(0 0 5px rgba(255, 200, 20, 0.35)) brightness(1.05); }
 }
 
 @media (max-width: 768px) {

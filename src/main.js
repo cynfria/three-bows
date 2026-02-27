@@ -373,16 +373,17 @@ els.btnRestart.addEventListener('click', () => {
   }, 650);
 });
 
-// ─── Border Hover ─────────────────────────────────────────────────────────────
-const borderFrame = document.getElementById('border-frame');
-const BORDER_ZONE = 90; // px from viewport edge triggers hover state
+// ─── Border Metallic Shader ────────────────────────────────────────────────────
+// Track cursor and move the specular highlight in SVG coordinate space.
+// SVG viewBox is 0 0 1227 739; the element is inset 32px on each side.
+const cursorLight = document.getElementById('cursorLight');
 
 document.addEventListener('mousemove', (e) => {
-  const near = e.clientX < BORDER_ZONE
-    || e.clientX > window.innerWidth  - BORDER_ZONE
-    || e.clientY < BORDER_ZONE
-    || e.clientY > window.innerHeight - BORDER_ZONE;
-  borderFrame?.classList.toggle('border-hover', near);
+  if (!cursorLight) return;
+  const svgX = (e.clientX - 32) / (window.innerWidth  - 64) * 1227;
+  const svgY = (e.clientY - 32) / (window.innerHeight - 64) * 739;
+  cursorLight.setAttribute('cx', svgX.toFixed(1));
+  cursorLight.setAttribute('cy', svgY.toFixed(1));
 });
 
 // ─── Init ─────────────────────────────────────────────────────────────────────

@@ -24,23 +24,20 @@
           <stop offset="85%"  stop-color="#B8720A"/>
           <stop offset="100%" stop-color="#4A2D00"/>
         </linearGradient>
-        <!-- Animated shine sweep left→right -->
-        <linearGradient id="shineGrad" gradientUnits="objectBoundingBox" y1="0" y2="1">
-          <animate attributeName="x1" values="-0.7;1.7" dur="5s" repeatCount="indefinite" calcMode="linear"/>
-          <animate attributeName="x2" values="-0.6;1.8" dur="5s" repeatCount="indefinite" calcMode="linear"/>
-          <stop offset="0%"   stop-color="white" stop-opacity="0"/>
-          <stop offset="42%"  stop-color="white" stop-opacity="0"/>
-          <stop offset="50%"  stop-color="white" stop-opacity="0.5"/>
-          <stop offset="58%"  stop-color="white" stop-opacity="0"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0"/>
-        </linearGradient>
+        <!-- Cursor-driven specular highlight (userSpaceOnUse so cx/cy are SVG coords) -->
+        <radialGradient id="cursorLight" cx="613" cy="369" r="260" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FFFCE8" stop-opacity="0.95"/>
+          <stop offset="22%"  stop-color="#FFE980" stop-opacity="0.6"/>
+          <stop offset="55%"  stop-color="#FFD740" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+        </radialGradient>
       </defs>
       <!-- Base metallic layer -->
       <path d="M12 9H19V0H31V11H21V18H38V0H1189V18H1206V11H1196V0H1208V9H1215V0H1227V11H1217V18H1227V30H1215V20H1208V37H1227V702H1208V719H1215V709H1227V721H1217V728H1227V739H1215V730H1208V739H1196V728H1206V721H1189V739H38V721H21V728H31V739H19V730H12V739H0V728H10V721H0V709H12V719H19V702H0V37H19V20H12V30H0V18H10V11H0V0H12V9ZM2 737H10V730H2V737ZM21 737H29V730H21V737ZM40 2V20H21V39H2V700H21V719H40V737H1187V719H1206V700H1225V39H1206V20H1187V2H40ZM1198 737H1206V730H1198V737ZM1217 737H1225V730H1217V737ZM12 728H19V721H12V728ZM1208 728H1215V721H1208V728ZM2 719H10V711H2V719ZM1217 719H1225V711H1217V719ZM2 28H10V20H2V28ZM1217 20V28H1225V20H1217ZM12 18H19V11H12V18ZM1208 11V18H1215V11H1208ZM2 9H10V2H2V9ZM21 9H29V2H21V9ZM1198 2V9H1206V2H1198ZM1217 2V9H1225V2H1217Z"
             fill="url(#metalGold)"/>
-      <!-- Shine overlay layer -->
+      <!-- Cursor specular overlay (screen blend = additive highlight only on the gold) -->
       <path d="M12 9H19V0H31V11H21V18H38V0H1189V18H1206V11H1196V0H1208V9H1215V0H1227V11H1217V18H1227V30H1215V20H1208V37H1227V702H1208V719H1215V709H1227V721H1217V728H1227V739H1215V730H1208V739H1196V728H1206V721H1189V739H38V721H21V728H31V739H19V730H12V739H0V728H10V721H0V709H12V719H19V702H0V37H19V20H12V30H0V18H10V11H0V0H12V9ZM2 737H10V730H2V737ZM21 737H29V730H21V737ZM40 2V20H21V39H2V700H21V719H40V737H1187V719H1206V700H1225V39H1206V20H1187V2H40ZM1198 737H1206V730H1198V737ZM1217 737H1225V730H1217V737ZM12 728H19V721H12V728ZM1208 728H1215V721H1208V728ZM2 719H10V711H2V719ZM1217 719H1225V711H1217V719ZM2 28H10V20H2V28ZM1217 20V28H1225V20H1217ZM12 18H19V11H12V18ZM1208 11V18H1215V11H1208ZM2 9H10V2H2V9ZM21 9H29V2H21V9ZM1198 2V9H1206V2H1198ZM1217 2V9H1225V2H1217Z"
-            fill="url(#shineGrad)"/>
+            fill="url(#cursorLight)" style="mix-blend-mode: screen;"/>
     </svg>
 
     <!-- ═══════════════════════════════════════ -->
