@@ -898,26 +898,209 @@ input[type="date"].empty {
 }
 
 @media (max-width: 768px) {
-  #border-frame { display: none; }
+  /* Hide small-screen blocker */
+  .small-screen-msg { display: none; }
 
-  .small-screen-msg {
-    display: flex;
-    position: fixed;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
-    background: #7E0909;
-    color: #FFDA6C;
-    font-family: var(--font-title);
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-align: center;
-    padding: 2rem;
-    z-index: 100;
+  /* Tighter border inset */
+  #border-frame {
+    inset: 12px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 24px);
   }
 
-  .screen {
-    display: none !important;
+  /* ── Screen 1 (Entry) ── */
+  .title-main {
+    font-size: clamp(2.4rem, 7vw, 3rem);
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  .entry-content-col {
+    padding: 0 1rem;
+    max-width: 332px;
+  }
+
+  /* ── Screen 2 (Bow) ── */
+  .bow-overlay {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .bow-title {
+    max-width: 90%;
+  }
+
+  /* ── Screen 3 (Oracle) ── */
+  .oracle-content {
+    gap: 1.5rem;
+  }
+
+  /* ── Screen 4 (Fortune) ── */
+  /* Hide side nav, let slides take full width */
+  .slide-nav {
+    display: none;
+  }
+
+  /* Consistent title size across all slides */
+  .slide-hero-title,
+  .slide-title,
+  .slide-title-top {
+    font-size: 2rem;
+  }
+
+  /* Body copy */
+  .slide-body,
+  #text-overall {
+    font-size: 1.15rem !important;
+    line-height: 1.35;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    text-align: center;
+  }
+
+  /* Base slide padding — 36px top = 24px from the 12px-inset border */
+  .slide,
+  .slide-hero,
+  .slide-centered,
+  .slide-lucky,
+  .slide-two-col,
+  .slide-compat,
+  .slide-closing {
+    padding: 36px 1.25rem 2rem;
+  }
+
+  /* Slide 0 (Hero) — title at top, more horizontal breathing room */
+  .slide-hero {
+    justify-content: flex-start;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    gap: 2rem;
+  }
+
+  /* Ba Zi chart 2×2 */
+  .bazi-chart {
+    grid-template-columns: repeat(2, 1fr);
+    width: calc(100% - 7rem);
+    margin: 0 auto;
+  }
+
+  .pillar-branch {
+    font-size: 2rem;
+  }
+
+  .pillar-label {
+    font-size: 0.78rem;
+  }
+
+  .pillar-element {
+    font-size: 0.82rem;
+  }
+
+  .slide-zodiac-img {
+    max-height: 32vh;
+  }
+
+  /* Slides 4–6 (Two-column) — title at top, row fills remaining height and centers */
+  .slide-two-col {
+    justify-content: flex-start;
+  }
+
+  .slide-two-col-row {
+    flex: 1;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-32px);
+  }
+
+  /* Reset flex: 1 on body text — in column layout it would stretch vertically */
+  .slide-two-col-row .slide-body--left {
+    flex: none;
+  }
+
+  /* Slides 4 & 6 — image comes after text in DOM, reverse to show image first */
+  #slide-4 .slide-two-col-row,
+  #slide-6 .slide-two-col-row {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  .slide-col-img {
+    width: clamp(120px, 55vw, 200px);
+  }
+
+  .slide-col-img--lg {
+    width: clamp(140px, 60vw, 220px);
+  }
+
+  /* Slide 7 (Compatibility) — title at top, content centered vertically */
+  .slide-compat {
+    justify-content: flex-start;
+  }
+
+  .slide-compat .slide-two-col-row {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-32px);
+  }
+
+  .slide-compat-img {
+    width: clamp(130px, 55vw, 220px);
+  }
+
+  .compat-content {
+    flex: none;
+    align-items: center;
+  }
+
+  .compat-group {
+    align-items: center;
+  }
+
+  .compat-tags {
+    justify-content: center;
+  }
+
+  .compat-label {
+    font-size: 0.8rem;
+  }
+
+  /* Down arrow — 24px from bottom border (12px inset + 24px) */
+  .slide-down-btn {
+    bottom: 36px;
+  }
+
+  /* Slide 2 (Lucky) */
+  .slide-lucky {
+    gap: 5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: calc(2rem + 48px);
+  }
+
+  /* Slides 1 & 3 (Centered) — shift image+body up */
+  .slide-centered-body {
+    transform: translateY(-40px);
+  }
+}
+
+@media (max-width: 480px) {
+  .slide,
+  .slide-hero,
+  .slide-centered,
+  .slide-lucky,
+  .slide-two-col,
+  .slide-compat,
+  .slide-closing {
+    padding: 1.5rem 1rem;
+  }
+
+  .slide-closing-line {
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
   }
 }
 

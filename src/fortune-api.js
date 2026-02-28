@@ -41,7 +41,7 @@ Format your response as JSON with EXACTLY these keys (no markdown, no code fence
     "harmonious": ["Animal1", "Animal2"],
     "challenging": ["Animal1", "Animal2"]
   },
-  "overall": "One powerful summary sentence — their fortune motto for 2026",
+  "overall": "2 concise sentences — a vivid, specific fortune reading for 2026 drawn from their Ba Zi chart. Include their defining energy for the year and one concrete area of life it will shape.",
   "lucky_numbers": [3, 7],
   "lucky_colors": ["Crimson", "Gold"],
   "lucky_directions": ["South", "Southeast"]
