@@ -176,7 +176,7 @@ label {
   letter-spacing: 0;
 }
 
-input[type="date"] {
+#dob {
   width: 100%;
   background: var(--cream);
   border: 1.5px solid rgba(212,160,23,0.5);
@@ -187,18 +187,13 @@ input[type="date"] {
   padding: 0.65rem 0.9rem;
   outline: none;
   transition: border-color 0.2s;
-  color-scheme: light;
 }
 
-input[type="date"]:focus {
+#dob:focus {
   border-color: var(--gold);
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-input[type="date"].empty {
+#dob::placeholder {
   color: rgba(61, 21, 0, 0.35);
 }
 
@@ -651,7 +646,7 @@ input[type="date"].empty {
 
 /* ── Shared slide body text ── */
 .slide-body {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--font-en-body);
   font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   line-height: 1.5;
   color: rgba(255,218,108,0.88);
@@ -901,11 +896,11 @@ input[type="date"].empty {
   /* Hide small-screen blocker */
   .small-screen-msg { display: none; }
 
-  /* Tighter border inset */
+  /* Tighter border inset — svh excludes browser chrome (address bar, nav bar) */
   #border-frame {
     inset: 12px;
     width: calc(100vw - 24px);
-    height: calc(100vh - 24px);
+    height: calc(100svh - 24px);
   }
 
   /* ── Screen 1 (Entry) ── */
@@ -918,8 +913,8 @@ input[type="date"].empty {
   }
 
   .entry-content-col {
-    padding: 0 1rem;
-    max-width: 332px;
+    padding: 0 2.25rem;
+    max-width: 100%;
   }
 
   /* ── Screen 2 (Bow) ── */
@@ -942,11 +937,12 @@ input[type="date"].empty {
     display: none;
   }
 
-  /* Consistent title size across all slides */
+  /* Consistent title size and top spacing across all slides */
   .slide-hero-title,
   .slide-title,
   .slide-title-top {
     font-size: 2rem;
+    margin-top: 0.75rem;
   }
 
   /* Body copy */
@@ -954,8 +950,8 @@ input[type="date"].empty {
   #text-overall {
     font-size: 1.15rem !important;
     line-height: 1.35;
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
     text-align: center;
   }
 
@@ -967,12 +963,13 @@ input[type="date"].empty {
   .slide-two-col,
   .slide-compat,
   .slide-closing {
-    padding: 36px 1.25rem 2rem;
+    padding: 48px 1.25rem 2rem;
   }
 
   /* Slide 0 (Hero) — title at top, more horizontal breathing room */
   .slide-hero {
     justify-content: flex-start;
+    padding-top: 48px;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
     gap: 2rem;
@@ -995,6 +992,10 @@ input[type="date"].empty {
 
   .pillar-element {
     font-size: 0.82rem;
+  }
+
+  .bazi-pillar {
+    padding: 0.75rem 0.75rem;
   }
 
   .slide-zodiac-img {
@@ -1025,6 +1026,16 @@ input[type="date"].empty {
   #slide-6 .slide-two-col-row {
     flex-direction: column-reverse;
     gap: 2rem;
+  }
+
+  /* Slide 6 (Relationships) — firecracker 10% smaller, tighter gap, shifted up */
+  #slide-6 .slide-two-col-row {
+    gap: 1rem;
+    transform: translateY(-44px);
+  }
+
+  #slide-6 .slide-col-img {
+    width: clamp(108px, 49.5vw, 180px);
   }
 
   .slide-col-img {
@@ -1086,6 +1097,17 @@ input[type="date"].empty {
   .slide-centered-body {
     transform: translateY(-40px);
   }
+
+  /* Slide 3 (Your zodiac) — tighter gap below image */
+  #slide-3 .slide-centered-body {
+    gap: 0.5rem;
+  }
+
+  /* Slide 8 (Closing) */
+  .slide-closing-line {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1101,6 +1123,11 @@ input[type="date"].empty {
 
   .slide-closing-line {
     font-size: clamp(1.5rem, 5vw, 3.5rem);
+  }
+
+  .slide-body,
+  #text-overall {
+    font-size: 1rem !important;
   }
 }
 

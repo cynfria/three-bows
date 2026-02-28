@@ -63,12 +63,22 @@ const els = {
   btnRestart:      document.getElementById('btn-restart'),
 };
 
-// ─── Date Input Placeholder Color ────────────────────────────────────────────
-function syncDobColor() {
-  els.dob.classList.toggle('empty', !els.dob.value);
+// ─── Date Input — auto-format MM/DD/YYYY as user types ───────────────────────
+els.dob.addEventListener('input', (e) => {
+  const el = e.target;
+  const digits = el.value.replace(/\D/g, '').slice(0, 8);
+  let formatted = digits;
+  if (digits.length > 2) formatted = digits.slice(0, 2) + '/' + digits.slice(2);
+  if (digits.length > 4) formatted = formatted.slice(0, 5) + '/' + digits.slice(4);
+  el.value = formatted;
+});
+
+function parseDob(raw) {
+  const m = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) return null;
+  const [, mm, dd, yyyy] = m;
+  return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
 }
-els.dob.addEventListener('change', syncDobColor);
-syncDobColor();
 
 // ─── Time Picker Interactions ─────────────────────────────────────────────────
 function updateAmPmSlider(activeOpt) {
@@ -135,9 +145,14 @@ function showScreen(name) {
 // ─── SCREEN 1: Entry ──────────────────────────────────────────────────────────
 els.btnApproach.addEventListener('click', () => {
   els.formError.textContent = '';
-  const dob = els.dob.value;
-  if (!dob) {
+  const rawDob = els.dob.value.trim();
+  if (!rawDob) {
     els.formError.textContent = 'Please enter your date of birth.';
+    return;
+  }
+  const dob = parseDob(rawDob);
+  if (!dob) {
+    els.formError.textContent = 'Please use MM/DD/YYYY format.';
     return;
   }
   state.dob  = dob;
@@ -361,7 +376,6 @@ els.btnRestart.addEventListener('click', () => {
   state.bazi = null;
   state.fortune = null;
   els.dob.value = '';
-  syncDobColor();
   els.tobHour.value = '';
   els.tobMinute.value = '';
   const amBtn = els.tobAmPm.querySelector('[data-val="AM"]');
@@ -438,6 +452,29 @@ els.btnRestart.addEventListener('click', () => {
     mx = e.clientX / window.innerWidth;
     my = e.clientY / window.innerHeight;
   });
+
+  // Accelerometer: tilt phone to shift the light on border + button
+  function applyOrientation(e) {
+    const gamma = Math.max(-45, Math.min(45, e.gamma ?? 0)); // left-right
+    const beta  = Math.max(-45, Math.min(45, e.beta  ?? 0)); // front-back
+    mx = (gamma + 45) / 90;
+    my = (beta  + 45) / 90;
+    // Button gradient angle follows left-right tilt
+    cancelAnimationFrame(btnReturnAnim);
+    const targetAngle = 125 + (gamma / 45) * 35;
+    if (ctaBtn) ctaBtn.style.setProperty('--btn-angle', targetAngle.toFixed(1) + 'deg');
+  }
+
+  function enableOrientation() {
+    if (typeof DeviceOrientationEvent?.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(state => { if (state === 'granted') window.addEventListener('deviceorientation', applyOrientation); })
+        .catch(() => {});
+    } else if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', applyOrientation);
+    }
+  }
+  document.addEventListener('touchstart', enableOrientation, { once: true });
 
   (function render() {
     const w = canvas.offsetWidth  | 0;

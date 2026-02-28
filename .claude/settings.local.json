@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add src/main.js src/style.css assets/knot-border.svg assets/threebows-favicon.png public/assets/knot-border.svg && git commit -m \"$\\(cat <<'EOF'\nTime picker: backspace from minute focuses hour; fix slide-down-btn centering; add knot-border and favicon assets\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git add index.html src/fortune-api.js src/style.css && git commit -m \"$\\(cat <<'EOF'\nMobile responsiveness: full layout overhaul for 320–768px\n\n- Remove small-screen blocker; all screens now usable on phones\n- Tighter border inset \\(12px\\), consistent 36px top padding across slides\n- Slide titles pinned to top at 32px, body copy 1.15rem/line-height 1.35\n- Ba Zi chart switches to 2×2 grid with 96px edge clearance\n- Two-col slides stack vertically; image above text on slides 4 & 6\n- Compat slide centers pills and vertically centers content group\n- Lucky slide increased gap and shifted up\n- Down arrow 24px from bottom border\n- Entry form capped at 332px, title bumped to 2.4rem min\n- Fortune overall prompt expanded to 2 descriptive sentences\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push && git log --oneline -1)",
+      "Bash(npx wrangler pages deploy dist --project-name three-bows 2>&1 | tail -5)",
+      "Bash(npm run build 2>&1 | tail -10)",
+      "Bash(npm run build 2>&1 | tail -5)"
+    ]
+  }
+}
